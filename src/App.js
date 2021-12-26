@@ -3,6 +3,8 @@ import { sign } from './util/signonce';
 function App() {
     const [input, setInput] = useState('');
     const [nonce, setNonce] = useState('');
+    const [session, setSession] = useState('');
+
     const [output, setOutput] = useState('');
     const [isError, setIsError] = useState(false);
 
@@ -15,8 +17,7 @@ function App() {
             if (typeof temp == 'string' && isValidJSON(temp)) {
                 temp = JSON.parse(temp);
             }
-            console.log(nonce);
-            setOutput(sign('{}', nonce));
+            setOutput(sign(temp, nonce, session));
             setIsError(false);
         } else if (!isValidJSON(temp)) {
             setIsError(true);
@@ -47,6 +48,15 @@ function App() {
                         className="code"
                         onChange={(e) => setNonce(e.target.value)}
                     />
+                    <p>Enter sessionID (optional):</p>
+                    <input
+                        type="text"
+                        id="input"
+                        name="input"
+                        value={session}
+                        className="code"
+                        onChange={(e) => setSession(e.target.value)}
+                    />
                     <button type="submit" className="btn">
                         Process
                     </button>
@@ -59,7 +69,9 @@ function App() {
                     </p>
                 )}
                 <h2>
-                    <a href="https://github.com/hemisemidemipresent/signonce">Github</a>
+                    <a href="https://github.com/hemisemidemipresent/signonce">
+                        Star this project on Github
+                    </a>
                 </h2>
             </div>
         </>

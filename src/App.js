@@ -26,7 +26,7 @@ function App() {
         <>
             <div className="div">
                 <h1 className="code">Signonce</h1>
-                <form className="form" onSubmit={handleSubmit}>
+                <form className="form" onSubmit={handleSubmit} autocomplete="off">
                     <input
                         type="text"
                         id="biginput"

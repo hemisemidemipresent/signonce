@@ -29,11 +29,10 @@ function App() {
                 <form className="form" onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        id="input"
+                        id="biginput"
                         name="input"
                         value={input}
                         className="code"
-                        id="biginput"
                         onChange={(e) => setInput(e.target.value)}
                     />
                     <p>Enter nonce:</p>

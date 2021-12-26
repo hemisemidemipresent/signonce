@@ -89,9 +89,9 @@ function str2rstr_utf8(input) {
  * Characters >255 have their high-byte silently ignored.
  */
 function rstr2binl(input) {
-    var output = Array(input.length >> 2);
-    for (var i = 0; i < output.length; i++) output[i] = 0;
-    for (var i = 0; i < input.length * 8; i += 8)
+    var output = [input.length >> 2];
+    for (let i = 0; i < output.length; i++) output[i] = 0;
+    for (let i = 0; i < input.length * 8; i += 8)
         output[i >> 5] |= (input.charCodeAt(i / 8) & 0xff) << i % 32;
     return output;
 }
@@ -198,7 +198,7 @@ function binl_md5(x, len) {
         c = safe_add(c, oldc);
         d = safe_add(d, oldd);
     }
-    return Array(a, b, c, d);
+    return [a, b, c, d];
 }
 
 /*
@@ -247,7 +247,7 @@ function core_sha1(x, len) {
     x[len >> 5] |= 0x80 << (24 - (len % 32));
     x[(((len + 64) >> 9) << 4) + 15] = len;
 
-    var w = Array(80);
+    var w = [80];
     var a = 1732584193;
     var b = -271733879;
     var c = -1732584194;
@@ -281,7 +281,7 @@ function core_sha1(x, len) {
         d = safe_add(d, oldd);
         e = safe_add(e, olde);
     }
-    return Array(a, b, c, d, e);
+    return [a, b, c, d, e];
 }
 
 /*
@@ -309,8 +309,8 @@ function core_hmac_sha1(key, data) {
     var bkey = str2binb(key);
     if (bkey.length > 16) bkey = core_sha1(bkey, key.length * chrsz);
 
-    var ipad = Array(16),
-        opad = Array(16);
+    var ipad = [16],
+        opad = [16];
     for (var i = 0; i < 16; i++) {
         ipad[i] = bkey[i] ^ 0x36363636;
         opad[i] = bkey[i] ^ 0x5c5c5c5c;
@@ -332,7 +332,7 @@ function rol(num, cnt) {
  * In 8-bit function, characters >255 have their hi-byte silently ignored.
  */
 function str2binb(str) {
-    var bin = Array();
+    var bin = [];
     var mask = (1 << chrsz) - 1;
     for (var i = 0; i < str.length * chrsz; i += chrsz)
         bin[i >> 5] |= (str.charCodeAt(i / chrsz) & mask) << (32 - chrsz - (i % 32));

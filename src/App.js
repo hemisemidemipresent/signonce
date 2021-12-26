@@ -26,6 +26,9 @@ function App() {
         <>
             <div className="div">
                 <h1 className="code">Signonce</h1>
+                <h3>
+                    A website to get signatures given a certain object/string and an optional nonce
+                </h3>
                 <form className="form" onSubmit={handleSubmit} autocomplete="off">
                     <input
                         type="text"
@@ -55,6 +58,9 @@ function App() {
                         {output}
                     </p>
                 )}
+                <h2>
+                    <a href="https://github.com/hemisemidemipresent/signonce">Github</a>
+                </h2>
             </div>
         </>
     );

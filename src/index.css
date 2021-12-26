@@ -47,8 +47,7 @@ input{
   text-align: start;
   
 }
-input#biginput{
-  padding:1em, 1em, 25vh, 1em;
+input#biginput{  
   padding-bottom:50vh;
 }
 input:focus-visible {
@@ -68,4 +67,11 @@ p.code{
 }
 .code#sig{
   color:var(--purple-2);
+}
+a{
+  color:var(--purple-1);
+  text-decoration: none;
+}
+h3{
+  color:var(--text-3);
 }

@@ -39,7 +39,7 @@ function App() {
                         className="code"
                         onChange={(e) => setInput(e.target.value)}
                     />
-                    <p>Enter nonce:</p>
+                    <p>Enter nonce (optional):</p>
                     <input
                         type="text"
                         id="input"

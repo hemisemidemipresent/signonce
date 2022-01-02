@@ -1,7 +1,7 @@
-const skuSignature = 'A26308E242742374';
+const btd6SkuSignature = 'A26308E242742374';
 const hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase        */
 const chrsz = 8;
-export function sign(body, nonce, sessionID = null) {
+export function sign(body, nonce, sessionID = null, skuSignature = btd6SkuSignature) {
     let bodyString = '';
     if (typeof body == 'object') bodyString = JSON.stringify(body);
     else bodyString = body;

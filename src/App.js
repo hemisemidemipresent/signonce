@@ -5,6 +5,8 @@ function App() {
     const [nonce, setNonce] = useState('');
     const [session, setSession] = useState('');
 
+    const [skuSignature, setSkuSignature] = useState('A26308E242742374');
+
     const [output, setOutput] = useState('');
     const [isError, setIsError] = useState(false);
 
@@ -17,7 +19,7 @@ function App() {
             if (typeof temp == 'string' && isValidJSON(temp)) {
                 temp = JSON.parse(temp);
             }
-            setOutput(sign(temp, nonce, session));
+            setOutput(sign(temp, nonce, session, skuSignature));
             setIsError(false);
         } else if (!isValidJSON(temp)) {
             setIsError(true);
@@ -39,7 +41,9 @@ function App() {
                         className="code"
                         onChange={(e) => setInput(e.target.value)}
                     />
-                    <p>Enter nonce (optional):</p>
+                    <p>
+                        Enter <code>nonce</code> (optional):
+                    </p>
                     <input
                         type="text"
                         id="input"
@@ -48,7 +52,9 @@ function App() {
                         className="code"
                         onChange={(e) => setNonce(e.target.value)}
                     />
-                    <p>Enter sessionID (optional):</p>
+                    <p>
+                        Enter <code>sessionID</code> (optional):
+                    </p>
                     <input
                         type="text"
                         id="input"
@@ -56,6 +62,17 @@ function App() {
                         value={session}
                         className="code"
                         onChange={(e) => setSession(e.target.value)}
+                    />
+                    <p>
+                        Enter <code>skuSignature</code> (optional):
+                    </p>
+                    <input
+                        type="text"
+                        id="input"
+                        name="input"
+                        value={skuSignature}
+                        className="code"
+                        onChange={(e) => setSkuSignature(e.target.value)}
                     />
                     <button type="submit" className="btn">
                         Process

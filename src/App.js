@@ -64,7 +64,7 @@ function App() {
                         onChange={(e) => setSession(e.target.value)}
                     />
                     <p>
-                        Enter <code>skuSignature</code> (optional):
+                        Enter <code>skuSignature</code> (BTD6's is given to you):
                     </p>
                     <input
                         type="text"

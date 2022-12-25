@@ -14,26 +14,31 @@ function App() {
         e.preventDefault();
         let temp = input;
 
-        if (isValidJSON(temp)) {
-            temp = JSON.parse(temp);
-            if (typeof temp == 'string' && isValidJSON(temp)) {
-                temp = JSON.parse(temp);
-            }
-            setOutput(sign(temp, nonce, session, skuSignature));
-            setIsError(false);
-        } else if (!isValidJSON(temp)) {
-            setIsError(true);
-        }
+        if (!isValidJSON(input)) setIsError(true);
+
+        let data = {};
+
+        // check if its a { data: "", error: null, sig: "" }
+        let obj = JSON.parse(input);
+        if (obj.data && obj.sig && obj.error == null) data = JSON.parse(obj.data);
+        else data = JSON.parse(input);
+        // if (typeof temp == 'string' && isValidJSON(temp)) {
+        //     temp = JSON.parse(temp);
+        // }
+        setOutput(sign(data, nonce, session, skuSignature));
+        setIsError(false);
     };
     return (
         <>
             <div className="div">
                 <h1 className="code">Signonce</h1>
-                <h3>
-                    A website to get signatures given a certain object/string and an optional nonce
-                </h3>
+                <h3>A website to get signatures given a certain object/string and an optional nonce</h3>
+                <p>
+                    If you directly paste in one with <code>&#x7B; error: null, data: "", sig: "" &#x7D;</code>, it will use
+                    the string in the "data" instead of using the sig provided in the object
+                </p>
                 <form className="form" onSubmit={handleSubmit} autocomplete="off">
-                    <input
+                    <textarea
                         type="text"
                         id="biginput"
                         name="input"
@@ -86,9 +91,7 @@ function App() {
                     </p>
                 )}
                 <h2>
-                    <a href="https://github.com/hemisemidemipresent/signonce">
-                        Star this project on Github
-                    </a>
+                    <a href="https://github.com/hemisemidemipresent/signonce">Star this project on Github</a>
                 </h2>
             </div>
         </>
